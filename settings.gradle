@@ -1,0 +1,4 @@
+include ':app'
+include ':backend'
+include ':javaJokes'
+include ':androidLibrary'
