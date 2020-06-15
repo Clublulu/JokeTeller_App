@@ -5,13 +5,25 @@ import com.udacity.android.javajokes.model.Joke;
 
 import java.util.List;
 
-public class JokeGenie {
+public final class JokeGenie {
+
+    private static JokeGenie sInstance;
+    private static List<Joke> jokes;
 
 
-    public List<Joke> getJokes() {
-        return JokeGenerator.getInstance().generateJokes();
+    private JokeGenie() {
+        jokes = JokeGenerator.getInstance().generateJokes();
     }
 
+    public static JokeGenie getInstance() {
+        if (sInstance == null) {
+            sInstance = new JokeGenie();
+        }
 
+        return sInstance;
+    }
 
+    public List<Joke> getJokes() {
+        return jokes;
+    }
 }

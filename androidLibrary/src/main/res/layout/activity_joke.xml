@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".JokeActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+        <variable
+            name="joke"
+            type="com.udacity.android.androidlibrary.model.Joke" />
+    </data>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/joke_setup_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{joke.setupLine}"
+            tools:text = "This is the setup line of the joke. It sets the scene so to speak."
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/joke_punch_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{joke.punchLine}"
+            tools:text = "This is the punch line of the joke. It's the actual joke part of the joke."
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintLeft_toLeftOf="@id/joke_setup_line"
+            app:layout_constraintTop_toBottomOf="@id/joke_setup_line"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

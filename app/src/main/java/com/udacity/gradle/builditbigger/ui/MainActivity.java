@@ -1,19 +1,32 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.udacity.android.androidlibrary.ui.JokeActivity;
+import com.udacity.gradle.builditbigger.R;
+import com.udacity.gradle.builditbigger.utility.DataObjectConverter;
+import com.udacity.gradle.builditbigger.utility.JokesInstanceInjector;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private MainActivityViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivityViewModelFactory factory = JokesInstanceInjector.
+                provideMainActivityViewModelFactory(getApplicationContext());
+        mViewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
     }
 
 
@@ -40,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), JokeActivity.class);
+        intent.putExtra(
+                JokeActivity.JOKE_KEY,
+                DataObjectConverter.convertJokeModel(mViewModel.getRandomJoke()));
+        startActivity(intent);
     }
-
-
 }
