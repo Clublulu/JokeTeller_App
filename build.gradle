@@ -2,8 +2,9 @@
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.google.guava:guava:22.0'
@@ -16,11 +17,13 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
 ext {
     lifecycle_version = "2.2.0"
+    espresso_version = "3.2.0"
 }

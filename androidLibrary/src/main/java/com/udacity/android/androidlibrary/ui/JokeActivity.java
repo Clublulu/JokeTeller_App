@@ -2,7 +2,7 @@ package com.udacity.android.androidlibrary.ui;
 
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -23,5 +23,9 @@ public class JokeActivity extends AppCompatActivity {
         binding.setJoke(joke);
 
 
+    }
+
+    public void goBackForJokes(View view) {
+        finish();
     }
 }

@@ -1,1 +1,5 @@
-<resources></resources>
+<resources>
+
+    <string name="tell_another_joke_button_label">Get more jokes</string>
+
+</resources>
