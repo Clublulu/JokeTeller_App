@@ -11,6 +11,14 @@ buildscript {
 }
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'udacity'
+            keyPassword 'password'
+            storeFile file("$rootDir/keystore.jks")
+            storePassword 'password'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion "26.0.3"
 
@@ -29,6 +37,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+
+    flavorDimensions "1.0.0"
+    productFlavors {
+        free {
+            applicationId "com.udactiy.gradle.builditbigger.free"
+        }
+
+        paid {
+            applicationId "com.udactiy.gradle.builditbigger.paid"
         }
     }
 
@@ -45,6 +65,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':androidLibrary')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     endpointsServer project(path: ':backend', configuration: 'endpoints')
 
     // ViewModel
@@ -52,7 +73,9 @@ dependencies {
     // AppCompat
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    // Google Ad Services compiled with only Free implementation
+    freeImplementation 'com.google.android.gms:play-services-ads:11.8.0'
+
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
