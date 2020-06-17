@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,17 +10,48 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.udactiy.gradle.builditbigger.paid.MainActivityFragment">
 
+
     <TextView
-        android:id="@+id/instructions_text_view"
+        android:id="@+id/joke_teller_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_xlarge"
+        android:text="@string/joke_teller_title"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/joke_teller_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instructions" />
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/version_label"
+        tools:text="(Paid Version)"
+        ads:layout_constraintTop_toBottomOf="@id/joke_teller_title"
+        ads:layout_constraintLeft_toLeftOf="@id/joke_teller_title"
+        ads:layout_constraintRight_toRightOf="@id/joke_teller_title"/>
 
     <Button
         android:id="@+id/tell_joke_button"
         style="@style/ButtonStyle"
-        android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJoke"
-        android:text="@string/button_text" />
+        android:textSize="@dimen/text_size_large"
+        android:text="@string/button_text"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="OnClick" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/ad_free_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:text="@string/add_free_label"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toRightOf="parent"
+        ads:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
