@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -13,42 +9,54 @@
             type="com.udacity.android.androidlibrary.model.Joke" />
     </data>
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="32dp">
 
-        <TextView
-            android:id="@+id/joke_setup_line"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{joke.setupLine}"
-            tools:text = "This is the setup line of the joke. It sets the scene so to speak."
-            android:textSize="@dimen/text_size_large"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="8dp"
+            android:background="@drawable/text_style"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintRight_toRightOf="parent">
 
-        <TextView
-            android:id="@+id/joke_punch_line"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{joke.punchLine}"
-            tools:text = "This is the punch line of the joke. It's the actual joke part of the joke."
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintLeft_toLeftOf="@id/joke_setup_line"
-            app:layout_constraintTop_toBottomOf="@id/joke_setup_line"/>
+            <TextView
+                android:id="@+id/joke_setup_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{joke.setupLine}"
+                tools:text = "This is the setup line of the joke. It sets the scene so to speak."
+                android:textSize="@dimen/text_size_large" />
 
-        <Button
-            android:id="@+id/tell_another_joke_button"
-            style="@style/ButtonStyle"
-            android:text="@string/tell_another_joke_button_label"
-            android:onClick="goBackForJokes"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:id="@+id/joke_punch_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{joke.punchLine}"
+                tools:text = "This is the punch line of the joke. It's the actual joke part of the joke."
+                android:textSize="@dimen/text_size_large" />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/tell_another_joke_button"
+        style="@style/ButtonStyle"
+        android:text="@string/tell_another_joke_button_label"
+        android:onClick="goBackForJokes"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
