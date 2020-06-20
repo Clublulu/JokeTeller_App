@@ -3,6 +3,18 @@ apply plugin: 'java-library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
+    // Retrofit2 - RxJava Adapter
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+    // Gson Converter
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+    testImplementation 'junit:junit:4.13'
+
 }
 
 targetCompatibility = "8"

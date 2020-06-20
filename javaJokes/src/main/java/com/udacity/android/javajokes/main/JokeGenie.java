@@ -3,17 +3,12 @@ package com.udacity.android.javajokes.main;
 import com.udacity.android.javajokes.data.JokeGenerator;
 import com.udacity.android.javajokes.model.Joke;
 
-import java.util.List;
-
 public final class JokeGenie {
 
     private static JokeGenie sInstance;
-    private static List<Joke> jokes;
 
 
-    private JokeGenie() {
-        jokes = JokeGenerator.getInstance().generateJokes();
-    }
+    private JokeGenie() {}
 
     public static JokeGenie getInstance() {
         if (sInstance == null) {
@@ -23,7 +18,10 @@ public final class JokeGenie {
         return sInstance;
     }
 
-    public List<Joke> getJokes() {
-        return jokes;
+    public Joke getJoke() {
+        return JokeGenerator.getInstance().getJoke();
     }
+
+
+
 }

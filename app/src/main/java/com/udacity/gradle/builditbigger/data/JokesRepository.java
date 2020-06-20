@@ -1,8 +1,10 @@
 package com.udacity.gradle.builditbigger.data;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import com.udacity.gradle.builditbigger.model.Joke;
 
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -22,6 +24,7 @@ public final class JokesRepository {
     private JokesRepository(JokesDataSource jokesDataSource, AppExecutors appExecutors) {
         mDataSource = jokesDataSource;
         mExecutor = appExecutors;
+
     }
 
 
@@ -33,18 +36,20 @@ public final class JokesRepository {
         return sInstance;
     }
 
-    public List<Joke> getJokes() {
-        Callable<List<Joke>> callable = () -> mDataSource.getJokes();
-        Future<List<Joke>> future = ((ExecutorService)
-                mExecutor.getDiskExecutor()).submit(callable);
-        List<Joke> jokes = null;
-        try {
-            jokes =  future.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    public LiveData<Joke> getJoke() {
+//        Callable<Joke> callable = () -> mDataSource.fetchJoke();
+//        Future<Joke> future = ((ExecutorService)
+//                mExecutor.getDiskExecutor()).submit(callable);
+//        Joke joke = null;
+//        try {
+//            joke =  future.get();
+//        } catch (ExecutionException | InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        mExecutor.getNetworkExecutor().execute(() -> mDataSource.fetchJoke());
 
-        return jokes;
+
+        return mDataSource.getJoke();
     }
 
 

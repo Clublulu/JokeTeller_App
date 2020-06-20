@@ -8,13 +8,7 @@ import java.util.List;
 public final class DataObjectConverter {
 
 
-    public static List<Joke> convertJokeModel(List<com.udacity.android.javajokes.model.Joke> javaJokeJokes) {
-        List<Joke> backendJokes = new ArrayList<>();
-
-        for (com.udacity.android.javajokes.model.Joke javaJoke : javaJokeJokes) {
-            backendJokes.add(new Joke(javaJoke.setupLine, javaJoke.punchLine));
-        }
-
-        return backendJokes;
+    public static Joke convertJokeModel(com.udacity.android.javajokes.model.Joke javaJoke) {
+        return new Joke(javaJoke.jokeType, javaJoke.joke, javaJoke.setup, javaJoke.delivery, javaJoke.jokeId);
     }
 }

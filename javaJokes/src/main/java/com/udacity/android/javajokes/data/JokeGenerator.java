@@ -5,6 +5,10 @@ import com.udacity.android.javajokes.model.Joke;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Helper class that generates jokes.
  *
@@ -12,8 +16,12 @@ import java.util.List;
 public final class JokeGenerator {
 
     private static JokeGenerator sInstance;
+    private static JokesDataSource mDataSource;
+    private Joke mJoke;
 
-    private JokeGenerator() {};
+    private JokeGenerator() {
+        mDataSource = JokesDataSource.getInstance();
+    };
 
 
     public static synchronized JokeGenerator getInstance() {
@@ -24,25 +32,32 @@ public final class JokeGenerator {
         return sInstance;
     }
 
-    public List<Joke> generateJokes() {
-        List<Joke> jokes = new ArrayList<>();
+   public Joke getJoke() {
+        Observable<Joke> jokeObservable = mDataSource.getJoke();
+        jokeObservable.subscribe(new Observer<Joke>() {
+            @Override
+            public void onSubscribe(Disposable d) {
 
-        jokes.add(createJoke(JokeConstants.JOKE_1, JokeConstants.JOKE_1_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_2, JokeConstants.JOKE_2_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_3, JokeConstants.JOKE_3_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_4, JokeConstants.JOKE_4_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_5, JokeConstants.JOKE_5_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_6, JokeConstants.JOKE_6_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_7, JokeConstants.JOKE_7_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_8, JokeConstants.JOKE_8_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_9, JokeConstants.JOKE_9_PUNCH));
-        jokes.add(createJoke(JokeConstants.JOKE_10, JokeConstants.JOKE_10_PUNCH));
+            }
 
-        return jokes;
-    }
+            @Override
+            public void onNext(Joke value) {
+                mJoke = value;
+            }
 
-    private Joke createJoke(String setupLine, String punchLine) {
-        return new Joke(setupLine, punchLine);
-    }
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onComplete() {
+                String a = " reached on complete";
+            }
+        });
+        return mJoke;
+   }
+
+
 
 }

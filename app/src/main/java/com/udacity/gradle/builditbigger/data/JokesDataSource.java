@@ -1,15 +1,15 @@
 package com.udacity.gradle.builditbigger.data;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
-import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
-import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import com.udacity.gradle.builditbigger.model.Joke;
 import com.udacity.gradle.builditbigger.utility.DataObjectConverter;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Data source class that retrieves a joke remotely through Google Cloud Endpoints API.
@@ -18,10 +18,19 @@ import java.util.List;
 public final class JokesDataSource {
 
     private static JokesDataSource sInstance;
-    private static MyApi myApiService = null;
+    private static MyApi myApiService;
+    private MutableLiveData<Joke> mJoke;
+
+    private static final String GCE_ROOT_URL = "http://10.0.2.2:8080/_ah/api/";
 
     private JokesDataSource() {
-
+        MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
+                new AndroidJsonFactory(), null)
+                .setRootUrl(GCE_ROOT_URL)
+                .setGoogleClientRequestInitializer(abstractGoogleClientRequest ->
+                        abstractGoogleClientRequest.setDisableGZipContent(true));
+        myApiService = builder.build();
+        mJoke = new MutableLiveData<>();
     }
 
     public static synchronized JokesDataSource getInstance() {
@@ -32,33 +41,16 @@ public final class JokesDataSource {
         return sInstance;
     }
 
-
-    public List<Joke> getJokes() {
-        if(myApiService == null) {  // Only do this once
-            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
-                    new AndroidJsonFactory(), null)
-                    // options for running against local devappserver
-                    // - 10.0.2.2 is localhost's IP address in Android emulator
-                    // - turn off compression when running against local devappserver
-                    .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                    .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
-                        @Override
-                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
-                            abstractGoogleClientRequest.setDisableGZipContent(true);
-                        }
-                    });
-            // end options for devappserver
-            myApiService = builder.build();
-        }
-
-        List<Joke> appJokes = null;
+    public void fetchJoke() {
         try {
-            appJokes = DataObjectConverter.convertJokeModel(myApiService.getJokes().execute().getItems());
+            Joke joke = DataObjectConverter.convertJokeModel(myApiService.getJoke().execute());
+            mJoke.postValue(joke);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return appJokes;
     }
 
+    public LiveData<Joke> getJoke() {
+        return mJoke;
+    }
 }

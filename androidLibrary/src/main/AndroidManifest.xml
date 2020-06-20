@@ -3,7 +3,8 @@
     package="com.udacity.android.androidlibrary">
 
     <application>
-        <activity android:name=".ui.JokeActivity"></activity>
+        <activity android:name=".ui.JokeActivity"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>
