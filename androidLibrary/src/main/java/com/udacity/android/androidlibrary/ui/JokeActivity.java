@@ -41,7 +41,7 @@ public class JokeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(LOG_TAG, "entered onResume");
+        Log.d(LOG_TAG, "entered onResume" + "\n");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class JokeActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(LOG_TAG, "entered onDestroy");
+        Log.d(LOG_TAG, "entered onDestroy" + "\n");
     }
 
     @Override
