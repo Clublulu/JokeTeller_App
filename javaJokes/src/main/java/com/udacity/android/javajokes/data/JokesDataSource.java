@@ -4,10 +4,11 @@ import com.udacity.android.javajokes.model.Joke;
 
 import io.reactivex.Observable;
 
+/**
+ * Jokes Data Source that calls the retrofit client to help retrieve a random joke.
+ *
+ */
 public final class JokesDataSource {
-
-    public static final String JOKES_API_BASE_URL = "https://sv443.net/jokeapi/v2/joke/any/";
-
 
     private static JokesDataSource sInstance;
     private static RetrofitClient mRetrofitClient;
@@ -26,6 +27,6 @@ public final class JokesDataSource {
 
 
     public Observable<Joke> getJoke() {
-        return mRetrofitClient.getJokesAPI().fetchJoke("single");
+        return mRetrofitClient.getJokesAPI().fetchJoke();
     }
 }

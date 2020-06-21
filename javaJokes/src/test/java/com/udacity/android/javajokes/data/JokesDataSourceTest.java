@@ -11,7 +11,6 @@ import io.reactivex.observers.TestObserver;
 public class JokesDataSourceTest {
 
 
-
     @Test
     public void testGetJokeFromAPI() {
         Observable<Joke> testJokeObservable = JokesDataSource.getInstance().getJoke();

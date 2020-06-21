@@ -7,7 +7,6 @@ public final class JokeGenie {
 
     private static JokeGenie sInstance;
 
-
     private JokeGenie() {}
 
     public static JokeGenie getInstance() {
@@ -21,7 +20,5 @@ public final class JokeGenie {
     public Joke getJoke() {
         return JokeGenerator.getInstance().getJoke();
     }
-
-
 
 }

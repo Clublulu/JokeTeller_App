@@ -2,15 +2,11 @@ package com.udacity.android.javajokes.data;
 
 import com.udacity.android.javajokes.model.Joke;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
 
 /**
- * Helper class that generates jokes.
+ * Mediator class between the Entry point to JavaJokes module and its Data Source class.
+ * Calls the Data Source to retrieve a Joke and pass it to the client.
  *
  */
 public final class JokeGenerator {
@@ -34,30 +30,7 @@ public final class JokeGenerator {
 
    public Joke getJoke() {
         Observable<Joke> jokeObservable = mDataSource.getJoke();
-        jokeObservable.subscribe(new Observer<Joke>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(Joke value) {
-                mJoke = value;
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onComplete() {
-                String a = " reached on complete";
-            }
-        });
+        jokeObservable.subscribe(joke -> mJoke = joke);
         return mJoke;
    }
-
-
-
 }

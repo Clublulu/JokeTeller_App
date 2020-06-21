@@ -3,6 +3,7 @@ package com.udacity.android.javajokes.data;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.udacity.android.javajokes.constant.JavaJokesConstant;
 import com.udacity.android.javajokes.model.Joke;
 
 
@@ -17,14 +18,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 final class RetrofitClient {
 
-
     private static RetrofitClient sInstance;
     private static Retrofit mRetrofit;
 
 
     private RetrofitClient() {
         mRetrofit = new Retrofit.Builder()
-            .baseUrl(JokesDataSource.JOKES_API_BASE_URL)
+            .baseUrl(JavaJokesConstant.JOKES_API_BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(createGsonConverter())
             .build();
@@ -48,6 +48,4 @@ final class RetrofitClient {
     }
 
     JokesAPI getJokesAPI() { return mRetrofit.create(JokesAPI.class); }
-
-
 }

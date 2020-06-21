@@ -2,6 +2,7 @@ package com.udacity.android.androidlibrary.ui;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,8 +17,11 @@ public class JokeActivity extends AppCompatActivity {
 
     private static final String JOKE_TYPE_SINGLE = "single";
 
+    private static final String LOG_TAG = JokeActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "entered onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke);
         Joke joke = getIntent().getParcelableExtra(JOKE_KEY);
@@ -26,6 +30,42 @@ public class JokeActivity extends AppCompatActivity {
 
     public void goBackForJokes(View view) {
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LOG_TAG, "entered onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LOG_TAG, "entered onResume");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LOG_TAG, "entered onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(LOG_TAG, "entered onPause");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LOG_TAG, "entered onDestroy");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(LOG_TAG, "entered onRestart");
     }
 
     private void displayJoke(Joke joke) {
