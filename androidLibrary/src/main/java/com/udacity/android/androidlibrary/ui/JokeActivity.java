@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.udacity.android.androidlibrary.R;
 import com.udacity.android.androidlibrary.model.Joke;
 
+import java.util.Objects;
+
 public class JokeActivity extends AppCompatActivity {
 
     public static final String JOKE_KEY = "joke_key";
@@ -21,51 +23,13 @@ public class JokeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "entered onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke);
-        Joke joke = getIntent().getParcelableExtra(JOKE_KEY);
-        displayJoke(joke);
+        displayJoke((Joke) Objects.requireNonNull(getIntent().getParcelableExtra(JOKE_KEY)));
     }
 
     public void goBackForJokes(View view) {
         finish();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(LOG_TAG, "entered onStart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(LOG_TAG, "entered onResume" + "\n");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(LOG_TAG, "entered onStop");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(LOG_TAG, "entered onPause");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(LOG_TAG, "entered onDestroy" + "\n");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(LOG_TAG, "entered onRestart");
     }
 
     private void displayJoke(Joke joke) {

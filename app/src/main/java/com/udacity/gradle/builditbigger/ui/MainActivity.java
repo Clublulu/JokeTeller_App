@@ -21,47 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityViewModel mViewModel;
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(LOG_TAG, "entered onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         MainActivityViewModelFactory factory = JokesInstanceInjector.
                 provideMainActivityViewModelFactory(getApplicationContext());
         mViewModel = new ViewModelProvider(this, factory).get(MainActivityViewModel.class);
-    }
-
-    @Override
-    protected void onStart() {
-        Log.d(LOG_TAG, "entered onStart");
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(LOG_TAG, "entered onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d(LOG_TAG, "entered onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(LOG_TAG, "entered onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(LOG_TAG, "entered onDestroy");
-        super.onDestroy();
     }
 
     @Override
@@ -91,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
     }
 }

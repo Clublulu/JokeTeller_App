@@ -33,6 +33,16 @@
         ads:layout_constraintLeft_toLeftOf="@id/joke_teller_title"
         ads:layout_constraintRight_toRightOf="@id/joke_teller_title"/>
 
+    <ProgressBar
+        android:id="@+id/pb_loading_indicator"
+        android:layout_height="42dp"
+        android:layout_width="42dp"
+        ads:layout_constraintBottom_toTopOf="@id/tell_joke_button"
+        ads:layout_constraintTop_toBottomOf="@id/joke_teller_version"
+        ads:layout_constraintLeft_toLeftOf="parent"
+        ads:layout_constraintRight_toRightOf="parent"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/tell_joke_button"
         style="@style/ButtonStyle"
